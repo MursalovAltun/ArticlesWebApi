@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.DTO;
 using Common.Services.Infrastructure.Services;
 using Common.WebApiCore.Exceptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Common.WebApiCore.Controllers
@@ -55,9 +53,6 @@ namespace Common.WebApiCore.Controllers
         /// </summary>
         /// <returns>Collection of Article DTO</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<CategoryDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Get()
         {
             var result = await this._articleService.Get();
@@ -69,10 +64,7 @@ namespace Common.WebApiCore.Controllers
         /// </summary>
         /// <param name="categoryId">Category id</param>
         /// <returns>Collection of Article DTO</returns>
-        [HttpGet("{categoryId:Guid}")]
-        [ProducesResponseType(typeof(CategoryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpGet("GetByCategory")]
         public async Task<IActionResult> GetByCategory(Guid categoryId)
         {
             var isExists = await this._categoryService.Exists(categoryId);
@@ -87,9 +79,6 @@ namespace Common.WebApiCore.Controllers
         /// <param name="id">Article id</param>
         /// <returns>Article DTO</returns>
         [HttpGet("{id:Guid}")]
-        [ProducesResponseType(typeof(CategoryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Get(Guid id)
         {
             var isExists = await this._articleService.Exists(id);
@@ -104,8 +93,6 @@ namespace Common.WebApiCore.Controllers
         /// <param name="id">Article id</param>
         /// <returns>Success: 200</returns>
         [HttpDelete("{id:Guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var isExists = await this._articleService.Exists(id);

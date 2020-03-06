@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.DTO;
 using Common.Services.Infrastructure.Services;
 using Common.WebApiCore.Exceptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Common.WebApiCore.Controllers
@@ -39,9 +37,6 @@ namespace Common.WebApiCore.Controllers
         /// </remarks>
         /// <returns>Category DTO</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(CategoryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CreateOrUpdate(CategoryAddDTO dto)
         {
             var result = await this._categoryService.Edit(dto);
@@ -53,9 +48,6 @@ namespace Common.WebApiCore.Controllers
         /// </summary>
         /// <returns>Collection of CategoryDTO</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<CategoryDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Get()
         {
             var result = await this._categoryService.Get();
@@ -68,9 +60,6 @@ namespace Common.WebApiCore.Controllers
         /// <param name="id">Category id</param>
         /// <returns>CategoryDTO</returns>
         [HttpGet("{id:Guid}")]
-        [ProducesResponseType(typeof(CategoryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Get(Guid id)
         {
             var isExists = await this._categoryService.Exists(id);
@@ -85,8 +74,6 @@ namespace Common.WebApiCore.Controllers
         /// <param name="id">Category id</param>
         /// <returns>Success: 200</returns>
         [HttpDelete("{id:Guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var isExists = await this._categoryService.Exists(id);

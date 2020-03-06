@@ -47,6 +47,7 @@ namespace Common.WebApiCore
                 options.RegisterValidatorsFromAssembly(Assembly.Load("Common.DTO"));
             })
             .AddNewtonsoftJson();
+            services.AddHttpContextAccessor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDataBaseInitializer dataBaseInitializer)

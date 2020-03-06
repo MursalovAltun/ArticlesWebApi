@@ -4,7 +4,7 @@ namespace Common.DTO
 {
     public class ArticleAddDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public string Title { get; set; }
 
