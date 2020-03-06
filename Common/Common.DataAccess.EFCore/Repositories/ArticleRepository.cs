@@ -23,6 +23,7 @@ namespace Common.DataAccess.EFCore.Repositories
         {
             var context = GetContext(session);
             return await context.Articles
+                .Include(x => x.Category)
                 .Where(obj => obj.Id == id && !obj.IsDelete)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -42,13 +43,18 @@ namespace Common.DataAccess.EFCore.Repositories
         public async Task<IEnumerable<Article>> Get(ContextSession session)
         {
             var context = GetContext(session);
-            return await context.Articles.AsNoTracking().ToListAsync();
+            return await context.Articles
+                .Include(x => x.Category)
+                .Where(x => !x.IsDelete)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Article>> GetByCategory(Guid categoryId, ContextSession session)
         {
             var context = GetContext(session);
             return await context.Articles
+                .Include(x => x.Category)
                 .Where(obj => obj.CategoryId == categoryId && !obj.IsDelete)
                 .AsNoTracking()
                 .ToListAsync();

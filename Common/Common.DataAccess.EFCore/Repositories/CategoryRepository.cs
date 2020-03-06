@@ -19,6 +19,7 @@ namespace Common.DataAccess.EFCore.Repositories
         {
             var context = GetContext(session);
             return await context.Categories
+                .Include(x => x.Articles)
                 .Where(obj => obj.Id == id && !obj.IsDelete)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -28,6 +29,7 @@ namespace Common.DataAccess.EFCore.Repositories
         {
             var context = GetContext(session);
             return await context.Categories
+                .Include(x => x.Articles)
                 .Where(obj => !obj.IsDelete && obj.UserId == session.UserId)
                 .AsNoTracking()
                 .ToListAsync();

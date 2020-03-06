@@ -10,6 +10,7 @@ namespace Common.Services.Infrastructure.MappingProfiles
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<CategoryAddDTO, Category>().ReverseMap();
+            CreateMap<ArticleCategoryDTO, Category>().ReverseMap();
         }
     }
 }

@@ -18,10 +18,6 @@ namespace Common.DTO
 
         public Guid CategoryId { get; set; }
 
-        public Guid UserId { get; set; }
-
-        public UserDTO User { get; set; }
-
-        public CategoryDTO Category { get; set; }
+        public ArticleCategoryDTO Category { get; set; }
     }
 }

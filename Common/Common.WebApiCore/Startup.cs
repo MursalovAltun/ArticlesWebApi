@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace Common.WebApiCore
 {
@@ -65,7 +66,7 @@ namespace Common.WebApiCore
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseConfiguredSwagger();
 
             app.UseCors("CorsPolicy");

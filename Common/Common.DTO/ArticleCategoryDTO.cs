@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Common.DTO
 {
-    public class CategoryDTO
+    public class ArticleCategoryDTO
     {
         public Guid Id { get; set; }
 
@@ -12,7 +11,5 @@ namespace Common.DTO
         public DateTime CreationDate { get; set; }
 
         public DateTime ModifyDate { get; set; }
-
-        public virtual IEnumerable<ArticleDTO> Articles { get; set; }
     }
 }
