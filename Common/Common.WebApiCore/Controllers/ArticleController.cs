@@ -16,10 +16,12 @@ namespace Common.WebApiCore.Controllers
     public class ArticleController : BaseApiController
     {
         private readonly IArticleService _articleService;
+        private readonly ICategoryService _categoryService;
 
-        public ArticleController(IArticleService articleService)
+        public ArticleController(IArticleService articleService, ICategoryService categoryService)
         {
-            _articleService = articleService;
+            this._articleService = articleService;
+            this._categoryService = categoryService;
         }
 
         /// <summary>
@@ -59,6 +61,23 @@ namespace Common.WebApiCore.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await this._articleService.Get();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// This endpoint is using for getting articles by categoryId
+        /// </summary>
+        /// <param name="categoryId">Category id</param>
+        /// <returns>Collection of Article DTO</returns>
+        [HttpGet("{categoryId:Guid}")]
+        [ProducesResponseType(typeof(CategoryDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> GetByCategory(Guid categoryId)
+        {
+            var isExists = await this._categoryService.Exists(categoryId);
+            if (!isExists) throw new BadRequestException("Category does not exist");
+            var result = await this._articleService.GetByCategory(categoryId);
             return Ok(result);
         }
 

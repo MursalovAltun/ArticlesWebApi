@@ -8,6 +8,7 @@ using Common.Services.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ArticleRepository = Common.DataAccess.EFCore.Repositories.ArticleRepository;
 
 namespace Common.DIContainerCore
 {
@@ -30,6 +31,7 @@ namespace Common.DIContainerCore
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IUserService, UserService<User>>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IArticleService, ArticleService>();
         }
 
         private static void InitRepositories(IServiceCollection services, IConfiguration configuration)
@@ -42,6 +44,7 @@ namespace Common.DIContainerCore
             services.AddTransient<ISettingsRepository, SettingsRepository>();
             services.AddTransient<IUserPhotoRepository, UserPhotoRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IArticleRepository, ArticleRepository>();
         }
     }
 }
