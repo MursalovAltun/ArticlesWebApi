@@ -75,6 +75,8 @@ namespace Common.WebApiCore
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

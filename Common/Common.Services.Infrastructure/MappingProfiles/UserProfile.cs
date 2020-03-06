@@ -22,9 +22,7 @@ namespace Common.Services.Infrastructure.MappingProfiles
                 .ForMember(d => d.AddressLat, opt => opt.MapFrom(src => src.Address.Lat))
                 .ForMember(d => d.AddressLng, opt => opt.MapFrom(src => src.Address.Lng))
                 .ForMember(d => d.UserRoles, opt => opt.MapFrom(src => Enumerable.Empty<Role>()))
-                .ForMember(d => d.UserName, opt => opt.MapFrom(src => src.Login))
-                .ForMember(d => d.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
-                .ForMember(d => d.NormalizedUserName, opt => opt.MapFrom(src => src.Login.ToUpper()));
+                .ForMember(d => d.UserName, opt => opt.MapFrom(src => src.Login));
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Common.DTO.AuthDTO;
 using Common.Services.Infrastructure.Services;
+using Common.WebApiCore.Exceptions;
 using Common.WebApiCore.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -45,8 +48,6 @@ namespace Common.WebApiCore.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login(LoginDTO loginDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
-
             var result = await authService.Login(loginDto);
 
             if (result.Succeeded)
@@ -56,10 +57,10 @@ namespace Common.WebApiCore.Controllers
 
             if (result.IsModelValid)
             {
-                return Unauthorized();
+                throw new UnauthorizedException("User not found");
             }
 
-            return BadRequest();
+            throw new UnauthorizedException("User not found");
         }
 
         /// <summary>
@@ -88,12 +89,10 @@ namespace Common.WebApiCore.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SignUp(SignUpDTO signUpDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
-
             var user = await _userService.GetByEmail(signUpDto.Email);
             if (user != null)
             {
-                return BadRequest("A user with such an email already exists.");
+                throw new BadRequestException("A user with such an email already exists");
             }
 
             var result = await authService.SignUp(signUpDto);
@@ -102,9 +101,9 @@ namespace Common.WebApiCore.Controllers
                 return Ok(new { token = result.Data });
 
             if (result.IsModelValid)
-                return Unauthorized();
+                throw new UnauthorizedException("A user with such an email already exists");
 
-            return BadRequest();
+            throw new UnauthorizedException("A user with such an email already exists");
         }
     }
 }

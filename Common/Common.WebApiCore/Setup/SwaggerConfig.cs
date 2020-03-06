@@ -28,7 +28,12 @@ namespace Common.WebApiCore.Setup
                         Name = "Apache-2.0",
                         Url = new Uri("http://www.apache.org/licenses/LICENSE-2.0")
                     },
-                    Description = "This is the server side application for Articles project."
+                    Description = "This is the server side application for <span style=\"color: #1bd63a;\">Articles</span> project.<br><br>" +
+                                  "To make requests to protected routes you should first login through Auth/Login endpoint.<br>" +
+                                  "If you don't have an account, create one using Auth/Sign-Up endpoint.<br>" +
+                                  "Once you successfully logged, copy your <b>AccessToken</b> and pass to the Authorize form,<br>" +
+                                  "that you can find in the right top side of this page.<br>" +
+                                  "For example: Bearer <b>AccessToken</b>"
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

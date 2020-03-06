@@ -28,5 +28,9 @@ namespace Common.DTO
         public SettingsDTO Settings { get; set; }
 
         public IEnumerable<string> Roles { get; set; }
+
+        public IEnumerable<ArticleDTO> Articles { get; set; }
+
+        public IEnumerable<CategoryDTO> Categories { get; set; }
     }
 }

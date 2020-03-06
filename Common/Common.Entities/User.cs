@@ -28,5 +28,7 @@ namespace Common.Entities
 
         public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual ICollection<UserClaim> Claims { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

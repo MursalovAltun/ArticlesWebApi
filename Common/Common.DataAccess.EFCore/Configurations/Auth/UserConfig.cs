@@ -51,6 +51,16 @@ namespace Common.DataAccess.EFCore.Configurations.Auth
                 .WithOne()
                 .HasForeignKey(obj => obj.UserId)
                 .IsRequired();
+
+            builder.HasMany(obj => obj.Articles)
+                .WithOne(x => x.User)
+                .HasForeignKey(obj => obj.UserId)
+                .IsRequired();
+
+            builder.HasMany(obj => obj.Categories)
+                .WithOne(x => x.User)
+                .HasForeignKey(obj => obj.UserId)
+                .IsRequired();
         }
     }
 }

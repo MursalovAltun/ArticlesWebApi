@@ -29,6 +29,7 @@ namespace Common.DIContainerCore
         {
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IUserService, UserService<User>>();
+            services.AddTransient<ICategoryService, CategoryService>();
         }
 
         private static void InitRepositories(IServiceCollection services, IConfiguration configuration)
@@ -40,6 +41,7 @@ namespace Common.DIContainerCore
             services.AddTransient<IUserClaimRepository<UserClaim>, UserClaimRepository>();
             services.AddTransient<ISettingsRepository, SettingsRepository>();
             services.AddTransient<IUserPhotoRepository, UserPhotoRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
         }
     }
 }
